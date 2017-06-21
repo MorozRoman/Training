@@ -1,0 +1,175 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ajax <3</title>
+<link rel="stylesheet" href="style.css" type="text/css"/> <!--Подключаем CSS-->
+<script type="text/javascript">
+
+function ajaxRead(file){ //Выводим жанр
+  var xmlObj; 
+  if(window.XMLHttpRequest){ 
+      xmlObj = new XMLHttpRequest(); 
+  } else if(window.ActiveXObject){ 
+      xmlObj = new ActiveXObject("Microsoft.XMLHTTP");  
+  } else { 
+      return; 
+  } 
+s="";
+var y="";
+//var x="";
+
+  xmlObj.onreadystatechange = function(){ 
+    if(xmlObj.readyState == 4){ 
+       var genres=xmlObj.responseXML.getElementsByTagName('genre'); //берём жанр
+	   //var books=xmlObj.responseXML.getElementsByTagName('book');	//берём книгу
+	for (var i=0;i<genres.length;i++) {
+	//alert("ggg");
+    s=genres[i].getElementsByTagName('name')[0].firstChild.nodeValue;
+	//x+="<p>"+s+"</p>";
+	y+="<option>"+s+"</option>";
+	}
+	//updateObj('xmlData',s); 
+	updateObj('form_data', y);
+     } 
+    } 
+    xmlObj.open ('GET', file, true); 
+    xmlObj.send (''); 
+  } 
+  
+  function updateObj(obj, data){ 
+   document.getElementById(obj).innerHTML = "<b>"+data+"</b>"; 
+  } 
+  
+ function ajaxRead2(file){ //Вывод списка книг данного жанра
+//alert("ggg");  
+  var xmlObj; 
+  if(window.XMLHttpRequest){ 
+      xmlObj = new XMLHttpRequest(); 
+  } else if(window.ActiveXObject){ 
+      xmlObj = new ActiveXObject("Microsoft.XMLHTTP");  
+  } else { 
+      return; 
+  } 
+s="";
+var y="";
+  xmlObj.onreadystatechange = function(){ 
+    if(xmlObj.readyState == 4){ 
+       var genres=xmlObj.responseXML.getElementsByTagName('genre'); //берём жанр
+	   var c=document.forms[0].book.selectedIndex;
+	   title_genre=genres[c].getElementsByTagName('name')[0].firstChild.nodeValue;
+	   var books=genres[c].getElementsByTagName('book');	//берём книгу
+	for (var i=0;i<books.length;i++) {
+    s=books[i].getElementsByTagName('title')[0].firstChild.nodeValue;
+	//x+="<p>"+s+"</p>";
+	y+="<option>"+s+"</option>";
+	}
+	//updateObj('xmlData',s); 
+	updateObj('form_data2', y);
+	ajaxRead4('data.xml');
+       
+     } 
+    } 
+    xmlObj.open ('GET', file, true); 
+    xmlObj.send (''); 
+  } 
+  
+  function ajaxRead3(file){	//Вывод автора книги, данного жанра 
+  var xmlObj; 
+  if(window.XMLHttpRequest){ 
+      xmlObj = new XMLHttpRequest(); 
+  } else if(window.ActiveXObject){ 
+      xmlObj = new ActiveXObject("Microsoft.XMLHTTP");  
+  } else { 
+      return; 
+  } 
+s="";
+var y="";
+str="";
+  xmlObj.onreadystatechange = function(){ 
+    if(xmlObj.readyState == 4)
+	  { 
+		var number_genre=document.forms[0].book.selectedIndex;
+	    var number_book=document.forms[0].book2.selectedIndex;
+	
+		var genres=xmlObj.responseXML.getElementsByTagName('genre'); //берём жанр
+		var books=genres[number_genre].getElementsByTagName('book');	//берём книгу
+		y+=books[number_book].getElementsByTagName('author')[0].firstChild.nodeValue;
+	str += "Автор книги: "+y;
+	updateObj('form_data3', str);
+		
+	  } 
+    } 
+    xmlObj.open ('GET', file, true); 
+    xmlObj.send (''); 
+	} 
+
+  //ДЗ
+  //добавить в книгу Прайс, 
+  //посчитать стоимость книг по жанру
+function ajaxRead4(file){ 
+   
+  var xmlObj; 
+  if(window.XMLHttpRequest){ 
+      xmlObj = new XMLHttpRequest(); 
+  } else if(window.ActiveXObject){ 
+      xmlObj = new ActiveXObject("Microsoft.XMLHTTP");  
+  } else { 
+      return; 
+  } 
+s="";
+var y="";
+str="";
+m="";
+var b=0;
+var sum =0;
+  xmlObj.onreadystatechange = function(){ 
+    if(xmlObj.readyState == 4){ 
+		var number_genre=document.forms[0].book.selectedIndex;
+		var genre=xmlObj.responseXML.getElementsByTagName('genre'); 			//Берём жанр
+		var books=genre[number_genre].getElementsByTagName('book'); 			//Берём книгу
+	 str+="<table><tr class='tr_first'><td>НАЗВАНИЕ</td><td>АВТОР</td><td>ЦЕНА</td></tr>";															 //Создаём табличку
+	
+	   for (var i=0;i<books.length;i++) {										//Берём из XML-файла
+			s=books[i].getElementsByTagName('title')[0].firstChild.nodeValue;	//Название книги			
+			m=books[i].getElementsByTagName('author')[0].firstChild.nodeValue;	//Автор
+			b=parseInt(books[i].getElementsByTagName('price')[0].firstChild.nodeValue);	//Цена (!Преобразуем в число!)
+			str+="<tr><td>"+s+"</td><td>"+m+"</td><td>"+b+"</td></tr>";			//Формируем строку из ^
+			sum+=b;																//Накапливаем стоимость
+		}	
+	str+="</table><p>Стоимость книг по жанру: "+sum+"</p>";						//Закрываем табличку и выводим стоимость
+	  updateObj('table_books', str);											
+    } 
+   } 
+    xmlObj.open ('GET', file, true); 
+    xmlObj.send (''); 
+  } 
+</script>
+</head>
+<body onload="ajaxRead('data.xml'); return false">
+<div id="box">
+<header>
+<h1>Книги</h1> 
+</header>
+
+<!--p><a href="data.xml" title="Показать книги"
+onclick="ajaxRead('data.xml'); return false">Показать книги</a>
+</p--> 
+<form>
+<p>Выбери жанр: 
+<select name="book" id="form_data" onchange="ajaxRead2('data.xml'); return false">
+</select>
+</p> 
+<p>Книги этого жанра: 
+	<select name="book2" id="form_data2" onchange="ajaxRead3('data.xml'); return false">  </select>
+</p>
+
+<p name="book3" id="form_data3"></p>
+
+	<div id="table_books"> <!-- Место для таблички-->
+	</div>
+</form>
+<footer>
+© Pivovarov, 2015
+</footer>
+</body>
+</html>

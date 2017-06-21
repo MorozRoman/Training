@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf8" ?>
+<root>
+<books>
+
+<genre>
+	<name>Научная литература</name>
+    <book>
+        <title>Введение в психоанализ</title>
+        <publisher>Команда "А"</publisher>
+        <author>Зигмунд Фрейд</author>
+        <cover src="/images/cover_defguide.jpg" />
+        <blurb>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</blurb>
+		<price>150</price>
+    </book>
+    <book>
+        <title>Японская письменность от истоков до наших дней</title>
+        <publisher>Восток-Запад</publisher>
+        <author>Кадзуаки Судо</author>
+        <cover src="/images/cover_domscripting.jpg" />
+        <blurb>Praesent et diam a ligula facilisis venenatis.</blurb>
+		<price>200</price>
+    </book>
+    <book>
+        <title>Избегайте занудства. Уроки жизни, прожитой в науке</title>
+        <publisher>Астрель</publisher>
+        <author>Джеймс Уотсон</author>
+        <cover src="/images/cover_utopia.jpg" />
+        <blurb>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</blurb>
+		<price>350</price>
+    </book>
+</genre>
+
+<genre>
+	<name>Детская литература</name>
+    <book>
+        <title>Что такое хорошо и что такое плохо</title>
+        <publisher>Книга за книгой</publisher>
+        <author>В.Маяковский</author>
+        <cover src="/images/cover_domscripting.jpg" />
+        <blurb>Praesent et diam a ligula facilisis venenatis.</blurb>
+		<price>150</price>
+    </book>
+    <book>
+        <title>Алиса в стране чудес</title>
+        <publisher>Sitepoint</publisher>
+        <author>Льюис Кэрролл</author>
+        <cover src="/images/cover_utopia.jpg" />
+        <blurb>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</blurb>
+		<price>20</price>
+    </book>
+	<book>
+        <title>Приключения Тома Сойера</title>
+        <publisher>O'Reilly</publisher>
+        <author>Марк Твен</author>
+        <cover src="/images/cover_defguide.jpg" />
+        <blurb>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</blurb>
+		<price>60</price>
+    </book>
+    
+</genre>
+
+<genre>
+	<name>Фантастика</name>
+    <book>
+        <title>Восстаньте из праха</title>
+        <publisher>Sitepoint</publisher>
+        <author>Филипп Хосе Фармер</author>
+        <cover src="/images/cover_utopia.jpg" />
+        <blurb>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</blurb>
+		<price>90</price>
+    </book>
+	<book>
+        <title>Пыточных дел мастер</title>
+        <publisher>O'Reilly</publisher>
+        <author>Джин Вулф</author>
+        <cover src="/images/cover_defguide.jpg" />
+        <blurb>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</blurb>
+		<price>120</price>
+    </book>
+    <book>
+        <title>Анафем</title>
+        <publisher>Friends of Ed</publisher>
+        <author>Нил Стивенсон</author>
+        <cover src="/images/cover_domscripting.jpg" />
+        <blurb>Praesent et diam a ligula facilisis venenatis.</blurb>
+		<price>170</price>
+    </book>
+    
+</genre>
+</books>
+</root>
